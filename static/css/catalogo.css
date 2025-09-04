@@ -1,0 +1,39 @@
+.catalogo-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 350px;
+    border: 2px solid #333;
+    font-size: 3rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    transition: all 0.4s ease-in-out;
+
+    /* Estado normal */
+    /* background-image: url("../img/imgAnime.png"); */
+    background-size: cover;
+    background-position: center;
+    color: white;
+    /* letras blancas sobre la imagen */
+}
+
+.catalogo-item:hover {
+    /* Estado hover */
+    background: white;
+    /* background-image: url("../img/imgAnime.png"); */
+    background-size: cover;
+    background-position: center;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    /* letras con la imagen */
+    border-color: white;
+    /* opcional: cambia el borde */
+}
+
+body {
+    max-width: 1500px;
+    /* O el ancho que desees */
+    margin: 0 auto;
+    /* Centra el contenido */
+}

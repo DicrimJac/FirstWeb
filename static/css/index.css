@@ -1,26 +1,33 @@
 body {
-    background-image: url('../img/ttten.svg');
-    background-size: cover;     
-    background-position: center; 
-  }
+  background-image: url('../img/ttten.svg');
+  background-size: cover;
+  background-position: center;
+  max-width: 1500px;
+  /* O el ancho que desees */
+  margin: 0 auto;
+  /* Centra el contenido */
+}
 
 .btn-transparent {
-    background-color: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    padding: 0;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0;
 }
 
 .btn-outline-warning {
-    color: black !important;           /* Texto normal en negro */
-    border-color: #ffc107 !important;  /* Mantiene el borde amarillo */
-  }
-  
-  .btn-outline-warning:hover,
-  .btn-outline-warning:active,
-  .btn-outline-warning:focus {
-    color: black !important;           /* Texto negro también en hover/active */
-    background-color: #ffc107 !important; /* Fondo amarillo */
-    border-color: #ffc107 !important;
-  }
-  
+  color: black !important;
+  /* Texto normal en negro */
+  border-color: #ffc107 !important;
+  /* Mantiene el borde amarillo */
+}
+
+.btn-outline-warning:hover,
+.btn-outline-warning:active,
+.btn-outline-warning:focus {
+  color: black !important;
+  /* Texto negro también en hover/active */
+  background-color: #ffc107 !important;
+  /* Fondo amarillo */
+  border-color: #ffc107 !important;
+}
