@@ -1,0 +1,20 @@
+h1 {
+    margin: auto;
+}
+
+.btn-outline-warning {
+  color: black !important;
+  /* Texto normal en negro */
+  border-color: #ffc107 !important;
+  /* Mantiene el borde amarillo */
+}
+
+.btn-outline-warning:hover,
+.btn-outline-warning:active,
+.btn-outline-warning:focus {
+  color: black !important;
+  /* Texto negro también en hover/active */
+  background-color: #ffc107 !important;
+  /* Fondo amarillo */
+  border-color: #ffc107 !important;
+}
