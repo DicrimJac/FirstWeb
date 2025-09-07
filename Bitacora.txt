@@ -8,3 +8,15 @@
 git checkout karii2
 git fetch origin
 git rebase origin/main
+
+
+
+
+
+- inicio como el dibujo de la jacqui
+- registro usuario centrar hacer con recuadro 
+- hacer el menu centrado a la hoja y cambio de colores
+
+-  pagina principal 
+- la pagina de catalogos lleva a esta vista pagina donde se ven los productos
+
