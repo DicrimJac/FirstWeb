@@ -1,3 +1,14 @@
+
+body {
+  background-image: url('../img/ttten.svg');
+  background-size: cover;
+  background-position: center;
+  max-width: 1500px;
+  /* O el ancho que desees */
+  margin: 0 auto;
+  /* Centra el contenido */
+}
+
 h1 {
     margin: auto;
 }
@@ -18,3 +29,5 @@ h1 {
   /* Fondo amarillo */
   border-color: #ffc107 !important;
 }
+
+
