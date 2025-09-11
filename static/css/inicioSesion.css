@@ -1,0 +1,18 @@
+.btn-custom-yellow {
+  background-color: #FFC107; 
+  color: black; 
+  border: none; 
+}
+
+.btn-custom-yellow:hover {
+  background-color: #FFB300;
+  color: black;
+}
+
+body {
+    background-image: url('../img/ttten.svg');
+    background-size: cover;
+    background-position: center;
+    max-width: 1500px;
+    margin: 0 auto;
+}

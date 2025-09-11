@@ -7,9 +7,8 @@
     <title>FiguraLab</title>
     <link rel="icon" href="img/reno.png" type="image/png" sizes="32x32">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+        crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/adminPage.css">
 </head>
@@ -38,50 +37,171 @@
             <tbody></tbody>
         </table>
     </div>
-    <!-- MODEL -->
+    <!-- MODAL -->
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Nuevo Usuario</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="form-floating mb-3">
-                        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                        <label for="floatingInput">Nombre Usuario</label>
+                        <input type="text" class="form-control" id="name" placeholder="Nombre Usuario">
+                        <label for="name">Nombre Usuario</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                        <label for="floatingPassword">Email</label>
+                        <input type="email" class="form-control" id="email" placeholder="Email">
+                        <label for="email">Email</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                        <label for="floatingPassword">Rol</label>
+                        <input type="password" class="form-control" id="pass" placeholder="Password">
+                        <label for="pass">Contraseña</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="rol" placeholder="Rol">
+                        <label for="rol">Rol</label>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-warning">Guardar</button>
+                    <button type="button" id="saveUserBtn" class="btn btn-warning">Guardar</button>
                 </div>
             </div>
         </div>
     </div>
+
     <div id="footer-placeholder"></div>
+
     <script>
-        fetch('header.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('header-placeholder').innerHTML = data;
-            });
-        fetch('footer.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('footer-placeholder').innerHTML = data;
-            });
+        // Cargar header y footer
+        fetch('header.html').then(r => r.text()).then(data => {
+            document.getElementById('header-placeholder').innerHTML = data;
+        });
+        fetch('footer.html').then(r => r.text()).then(data => {
+            document.getElementById('footer-placeholder').innerHTML = data;
+        });
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Tu users.js debe cargarse aquí -->
+    <script src="js/users.js"></script>
+
+    <script>
+        // Inputs del modal
+        const nameInput = document.getElementById("name");
+        const emailInput = document.getElementById("email");
+        const passInput = document.getElementById("pass");
+        const roleInput = document.getElementById("rol");
+
+        // Renderizar usuarios en la tabla
+        function renderUsers() {
+            const tbody = document.querySelector("#tablaProductos tbody");
+            tbody.innerHTML = "";
+
+            const allUsers = users.getUsers();
+
+            allUsers.forEach((user, index) => {
+                const tr = document.createElement("tr");
+                tr.innerHTML = `
+          <td>${index + 1}</td>
+          <td>${user.name}</td>
+          <td>${user.email}</td>
+          <td>${user.role}</td>
+          <td>
+            <button class="btn btn-sm btn-outline-primary me-2" onclick="editUser('${user.email}')">Editar</button>
+            <button class="btn btn-sm btn-outline-danger" onclick="deleteUserAction('${user.email}')">Eliminar</button>
+          </td>
+        `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // Eliminar usuario
+        function deleteUserAction(email) {
+            if (confirm(`¿Seguro que quieres eliminar a ${email}?`)) {
+                users.deleteUser(email);
+                renderUsers();
+            }
+        }
+
+        // Editar usuario
+        function editUser(email) {
+            const user = users.getUsers().find(u => u.email === email);
+            if (!user) return;
+
+            document.getElementById("staticBackdropLabel").innerText = "Editar Usuario";
+            nameInput.value = user.name;
+            emailInput.value = user.email;
+            emailInput.readOnly = true;
+            passInput.value = user.pass || "";
+            roleInput.value = user.role;
+
+            document.getElementById("saveUserBtn").setAttribute("data-edit-email", email);
+
+            const modal = new bootstrap.Modal(document.getElementById("staticBackdrop"));
+            modal.show();
+        }
+
+        // Guardar usuario (nuevo o editado)
+        function saveUser() {
+            const name = nameInput.value.trim();
+            const email = emailInput.value.trim();
+            const pass = passInput.value.trim();
+            const role = roleInput.value.trim();
+
+            if (!name || !email || !role) {
+                alert("Todos los campos son obligatorios.");
+                return;
+            }
+
+            const editEmail = document.getElementById("saveUserBtn").getAttribute("data-edit-email");
+
+            if (editEmail) {
+                // Editar: borrar viejo y registrar nuevo
+                users.deleteUser(editEmail);
+                users.registerUser({ name, email, pass });
+                const all = users.getUsers();
+                const idx = all.findIndex(u => u.email === email);
+                if (idx !== -1) {
+                    all[idx].role = role;
+                    localStorage.setItem(users.LS_KEYS.USERS, JSON.stringify(all));
+                }
+                document.getElementById("saveUserBtn").removeAttribute("data-edit-email");
+                emailInput.readOnly = false;
+            } else {
+                // Crear nuevo
+                const result = users.registerUser({ name, email, pass });
+                if (!result.ok) {
+                    alert(result.message);
+                    return;
+                }
+                const all = users.getUsers();
+                const idx = all.findIndex(u => u.email === email);
+                if (idx !== -1) {
+                    all[idx].role = role;
+                    localStorage.setItem(users.LS_KEYS.USERS, JSON.stringify(all));
+                }
+            }
+
+            renderUsers();
+
+            // Reset modal
+            const modalEl = document.getElementById("staticBackdrop");
+            bootstrap.Modal.getInstance(modalEl).hide();
+            document.getElementById("staticBackdropLabel").innerText = "Nuevo Usuario";
+            nameInput.value = "";
+            emailInput.value = "";
+            passInput.value = "";
+            roleInput.value = "";
+        }
+
+        // Inicializar
+        document.addEventListener("DOMContentLoaded", () => {
+            renderUsers();
+            document.getElementById("saveUserBtn").addEventListener("click", saveUser);
+        });
+    </script>
 </body>
 
 </html>

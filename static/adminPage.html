@@ -2,232 +2,206 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FiguraLab</title>
-    <link rel="icon" href="img/reno.png" type="image/png" sizes="32x32">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-        crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="css/adminPage.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FiguraLab</title>
+  <link rel="icon" href="img/reno.png" type="image/png" sizes="32x32">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="css/adminPage.css">
 </head>
 
 <body>
-    <div id="header-placeholder"></div>
-    <!-- ----------------------------------contenido------------------------- -->
-    <br>
-    <nav class="nav">
-        <h1>Administrador de productos</h1>
-        <button type="button" class="btn btn-outline-warning m-5" data-bs-toggle="modal"
-            data-bs-target="#staticBackdrop">Nuevo Producto</button>
-    </nav>
-    <br>
-    <div class="table-responsive">
-        <table class="table table-striped align-middle" id="tablaProductos">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Producto</th>
-                    <th>Precio</th>
-                    <th>Stock</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-    </div>
-    </main>
-    <!-- MODEL -->
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-floating mb-3">
-                        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                        <label for="floatingInput">Nombre Producto</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                        <label for="floatingPassword">Cantidad</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                        <label for="floatingPassword">Precio</label>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Imagen (JPG/PNG, máx ~1MB)</label>
-                        <input id="prodImg" type="file" accept="image/*" class="form-control">
-                        <div class="form-text">Opcional. Si no subes, se usará una imagen por defecto.</div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-warning">Guardar</button>
-                </div>
-            </div>
+  <div id="header-placeholder"></div>
+  <!-- ----------------------------------contenido------------------------- -->
+  <br>
+  <nav class="nav">
+    <h1>Administrador de productos</h1>
+    <button type="button" class="btn btn-outline-warning m-5" data-bs-toggle="modal"
+      data-bs-target="#staticBackdrop">Nuevo Producto</button>
+  </nav>
+  <br>
+  <div class="table-responsive">
+    <table class="table table-striped align-middle" id="tablaProductos">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Producto</th>
+          <th>Precio</th>
+          <th>Stock</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  </main>
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Nuevo Producto</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
+        <div class="modal-body">
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="prodName" placeholder="Nombre del producto">
+            <label for="prodName">Nombre Producto</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="number" class="form-control" id="prodStock" placeholder="Stock">
+            <label for="prodStock">Cantidad</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="number" class="form-control" id="prodPrice" placeholder="Precio">
+            <label for="prodPrice">Precio</label>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Imagen (JPG/PNG, máx ~1MB)</label>
+            <input id="prodImg" type="file" accept="image/*" class="form-control">
+            <div class="form-text">Opcional. Si no subes, se usará una imagen por defecto.</div>
+          </div>
+        </div>
+        <!-- ⚠️ El footer debe ir aquí, dentro de .modal-content -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" id="saveProdBtn" class="btn btn-warning">Guardar</button>
+        </div>
+      </div>
     </div>
-    <div id="footer-placeholder"></div>
-    <script>
-        fetch('header.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('header-placeholder').innerHTML = data;
-            });
-        fetch('footer.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('footer-placeholder').innerHTML = data;
-            });
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/auth.js"></script>
+  </div>
 
-    <!-- REVISAR -->
 
-    <script>
-        const PROD_KEY = "APP_PRODS";
-        function getProds() { try { return JSON.parse(localStorage.getItem(PROD_KEY)) || []; } catch { return []; } }
-        function saveProds(p) { localStorage.setItem(PROD_KEY, JSON.stringify(p)); }
 
-        // ===== Imagen: lectura/compresión =====
-        let currentImgData = ""; // DataURL actual del modal
+  <div id="footer-placeholder"></div>
+  <script>
+    fetch('header.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('header-placeholder').innerHTML = data;
+      });
+    fetch('footer.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('footer-placeholder').innerHTML = data;
+      });
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/productos.js"></script>
+  <script>
+    const nameInput = document.getElementById("prodName");
+    const stockInput = document.getElementById("prodStock");
+    const priceInput = document.getElementById("prodPrice");
+    const imgInput = document.getElementById("prodImg");
 
-        function readFileAsDataURL(file) {
-            return new Promise((res, rej) => {
-                const fr = new FileReader();
-                fr.onload = () => res(fr.result);
-                fr.onerror = rej;
-                fr.readAsDataURL(file);
-            });
+    function renderProducts() {
+      const tbody = document.querySelector("#tablaProductos tbody");
+      tbody.innerHTML = "";
+
+      const all = products.getProducts();
+      all.forEach((p, index) => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+        <td>${index + 1}</td>
+        <td>${p.name}</td>
+        <td>$${p.price}</td>
+        <td>${p.stock}</td>
+        <td>
+          <button class="btn btn-sm btn-outline-primary me-2" onclick="editProduct('${p.id}')">Editar</button>
+          <button class="btn btn-sm btn-outline-danger" onclick="deleteProductAction('${p.id}')">Eliminar</button>
+        </td>
+      `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function deleteProductAction(id) {
+      if (confirm("¿Seguro que quieres eliminar este producto?")) {
+        products.deleteProduct(id);
+        renderProducts();
+      }
+    }
+
+    function editProduct(id) {
+      const p = products.getProducts().find(prod => prod.id === id);
+      if (!p) return;
+
+      document.getElementById("staticBackdropLabel").innerText = "Editar Producto";
+      nameInput.value = p.name;
+      stockInput.value = p.stock;
+      priceInput.value = p.price;
+      imgInput.value = "";
+
+      document.getElementById("saveProdBtn").setAttribute("data-edit-id", id);
+
+      const modal = new bootstrap.Modal(document.getElementById("staticBackdrop"));
+      modal.show();
+    }
+
+    function saveProduct() {
+      const name = nameInput.value.trim();
+      const stock = parseInt(stockInput.value.trim()) || 0;
+      const price = parseFloat(priceInput.value.trim()) || 0;
+
+      if (!name) {
+        alert("El nombre es obligatorio");
+        return;
+      }
+
+      const editId = document.getElementById("saveProdBtn").getAttribute("data-edit-id");
+      const file = imgInput.files[0];
+
+      // función auxiliar que guarda el producto
+      const doSave = (imgData) => {
+        if (editId) {
+          const newProd = { id: editId, name, stock, price, img: imgData };
+          products.updateProduct(editId, newProd);
+          document.getElementById("saveProdBtn").removeAttribute("data-edit-id");
+        } else {
+          const newProd = { id: Date.now().toString(), name, stock, price, img: imgData };
+          products.addProduct(newProd);
         }
 
-        // Reescala máximo 800px, calidad 0.85
-        async function compressImage(dataURL, maxSize = 800, mime = 'image/jpeg', quality = 0.85) {
-            return new Promise((res) => {
-                const img = new Image();
-                img.onload = () => {
-                    const scale = Math.min(maxSize / img.width, maxSize / img.height, 1);
-                    const w = Math.round(img.width * scale);
-                    const h = Math.round(img.height * scale);
-                    const canvas = document.createElement('canvas');
-                    canvas.width = w; canvas.height = h;
-                    const ctx = canvas.getContext('2d');
-                    ctx.drawImage(img, 0, 0, w, h);
-                    res(canvas.toDataURL(mime, quality));
-                };
-                img.src = dataURL;
-            });
-        }
+        renderProducts();
+        resetModal();
+      };
 
-        function renderTabla() {
-            const prods = getProds();
-            const $tbody = $("#tablaProductos tbody").empty();
-            prods.forEach((p, i) => {
-                const thumb = p.img || `https://picsum.photos/seed/prod${p.id}/60/40`;
-                $tbody.append(`
-          <tr>
-            <td>${i + 1}</td>
-            <td class="d-flex align-items-center gap-2">
-              <img src="${thumb}" style="width:60px;height:40px;object-fit:cover;border-radius:6px;border:1px solid #ddd">
-              <span>${p.nombre}</span>
-            </td>
-            <td>$${p.precio}</td>
-            <td>${p.stock}</td>
-            <td>
-              <button class="btn btn-sm btn-primary editar" data-id="${p.id}">Editar</button>
-              <button class="btn btn-sm btn-danger eliminar" data-id="${p.id}">Eliminar</button>
-            </td>
-          </tr>
-        `);
-            });
-        }
+      if (file) {
+        const reader = new FileReader();
+        reader.onloadend = () => doSave(reader.result);
+        reader.readAsDataURL(file);
+      } else {
+        // si no se subió archivo, usa imagen por defecto
+        doSave("img/reno.png");
+      }
+    }
 
-        $(function () {
-            // Guards
-            const user = AuthStore.getCurrentUser();
-            if (!user) { location.href = "login.html"; return; }
-            if (user.role !== "admin") { location.href = "index.html"; return; }
+    function resetModal() {
+  const modalEl = document.getElementById("staticBackdrop");
+  const modal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
+  modal.hide();
 
-            Layout.loadPartials();
-            renderTabla();
+  // 🔧 fuerza limpieza de backdrop (por si acaso)
+  document.querySelectorAll(".modal-backdrop").forEach(el => el.remove());
 
-            // Nuevo
-            $("#btnNuevo").on("click", () => {
-                $("#prodId").val("");
-                $("#prodNombre, #prodPrecio, #prodStock").val("");
-                $("#prodImg").val("");
-                currentImgData = "";
-                $("#prodPreview").attr("src", "").addClass("d-none");
-                new bootstrap.Modal("#productoModal").show();
-            });
+  document.getElementById("staticBackdropLabel").innerText = "Nuevo Producto";
+  nameInput.value = "";
+  stockInput.value = "";
+  priceInput.value = "";
+  imgInput.value = "";
+}
 
-            // Cargar imagen
-            $("#prodImg").on("change", async function () {
-                const file = this.files[0];
-                if (!file) return;
-                if (!/image\/(png|jpeg|jpg)/i.test(file.type)) { alert("Sube JPG o PNG"); this.value = ""; return; }
-                if (file.size > 1.2 * 1024 * 1024) { /* aviso, se comprime igual */ }
-                try {
-                    const raw = await readFileAsDataURL(file);
-                    currentImgData = await compressImage(raw, 800, 'image/jpeg', 0.85);
-                    $("#prodPreview").attr("src", currentImgData).removeClass("d-none");
-                } catch (e) { console.warn(e); alert("No se pudo leer la imagen."); }
-            });
 
-            // Guardar
-            $("#btnGuardarProd").on("click", () => {
-                const id = $("#prodId").val();
-                const prods = getProds();
-                if (id) {
-                    const idx = prods.findIndex(p => String(p.id) === String(id));
-                    prods[idx].nombre = $("#prodNombre").val();
-                    prods[idx].precio = $("#prodPrecio").val();
-                    prods[idx].stock = $("#prodStock").val();
-                    if (currentImgData) prods[idx].img = currentImgData; // reemplaza solo si subió nueva
-                } else {
-                    prods.push({
-                        id: Date.now(),
-                        nombre: $("#prodNombre").val(),
-                        precio: $("#prodPrecio").val(),
-                        stock: $("#prodStock").val(),
-                        img: currentImgData || ""
-                    });
-                }
-                saveProds(prods);
-                renderTabla();
-                bootstrap.Modal.getInstance(document.getElementById("productoModal")).hide();
-            });
+    document.addEventListener("DOMContentLoaded", () => {
+      renderProducts();
+      document.getElementById("saveProdBtn").addEventListener("click", saveProduct);
+    });
+  </script>
 
-            // Editar
-            $(document).on("click", ".editar", function () {
-                const p = getProds().find(x => String(x.id) === String($(this).data("id")));
-                $("#prodId").val(p.id);
-                $("#prodNombre").val(p.nombre);
-                $("#prodPrecio").val(p.precio);
-                $("#prodStock").val(p.stock);
-                $("#prodImg").val("");
-                currentImgData = "";
-                if (p.img) { $("#prodPreview").attr("src", p.img).removeClass("d-none"); }
-                else { $("#prodPreview").attr("src", "").addClass("d-none"); }
-                new bootstrap.Modal("#productoModal").show();
-            });
-
-            // Eliminar
-            $(document).on("click", ".eliminar", function () {
-                let prods = getProds().filter(x => String(x.id) !== String($(this).data("id")));
-                saveProds(prods);
-                renderTabla();
-            });
-        });
-    </script>
 </body>
 
 </html>

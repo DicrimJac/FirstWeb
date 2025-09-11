@@ -1,0 +1,30 @@
+body {
+  background-image: url('../img/ttten.svg');
+  background-size: cover;
+  background-position: center;
+  max-width: 1500px;
+  /* O el ancho que desees */
+  margin: 0 auto;
+  /* Centra el contenido */
+}
+
+.btn-transparent {
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0;
+}
+
+.btn-custom-yellow.w-100 {
+  color: black !important;
+  border-color: #ffc107 !important;
+  background-color: #ffc107 !important;
+}
+
+.btn-custom-yellow.w-100:hover,
+.btn-custom-yellow.w-100:active,
+.btn-custom-yellow.w-100:focus {
+  color: black !important;
+  background-color: #FFB300 !important;
+  border-color: #FFB300 !important;
+}

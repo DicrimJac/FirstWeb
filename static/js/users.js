@@ -105,7 +105,7 @@ function logout() {
 loadUsers();
 
 // Exponer funciones globalmente
-window.AuthStore = {
+window.users = {
     LS_KEYS,
     registerUser,
     loginUser,

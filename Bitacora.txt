@@ -3,18 +3,18 @@
 04/09/2025 - se agrego catalogo, aun falta por terminar
 06/0972025 - prueba - kariii
 
-
-
 git checkout karii2
 git fetch origin
 git rebase origin/main
 
+- inicio de sesion -- listo!!!
+- registro usuario centrar hacer con recuadro -- listo!!!
+    deje el codigo principal porque no sabia que tenias y que modificaciones le habias hecho
+    porque arriba tenias mas links que los que yo estaba ocupando asi que no los kise borrar por si acaso
+    -- los deje comentados eso si, hay ke revisarlos.
 
 
-
-
-- inicio como el dibujo de la jacqui
-- registro usuario centrar hacer con recuadro 
+- pagina de inicio como el dibujo de la jacqui
 - hacer el menu centrado a la hoja y cambio de colores
 
 -  pagina principal 
