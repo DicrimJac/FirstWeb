@@ -21,36 +21,59 @@
     <h1 class="mb-4">Catálogo de Productos</h1>
     <div class="row" id="catalogoContainer"></div>
   </main>
+  <!-- Offcanvas Carrito DERECHO -->
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasCart" aria-labelledby="offcanvasCartLabel">
+    <div class="offcanvas-header bg-warning-subtle">
+      <h5 class="offcanvas-title fw-bold" id="offcanvasCartLabel">🛒 Tu Carrito</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+    </div>
+    <div class="offcanvas-body">
+      <ul class="list-group" id="cart-items">
+        <!-- Aquí se inyectarán productos -->
+      </ul>
+      <hr>
+      <div class="d-flex justify-content-between fw-bold">
+        <span>Total:</span>
+        <span id="cart-total">$0</span>
+      </div>
+      <a class="btn btn-warning w-100 mt-3" href = "gracias.html">Finalizar Compra</a>
+    </div>
+  </div>
   <div id="footer-placeholder"></div>
 
+  <script src="js/users.js"></script>  
+  <script src="js/controlSeccion.js"></script>
   <script>
     fetch('header.html')
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById('header-placeholder').innerHTML = data;
-      });
+      .then(r => r.text())
+      .then(html => {
+        document.getElementById('header-placeholder').innerHTML = html;
+        applySessionUI(); 
+      })
+      .catch(error => console.error('Error al cargar el header:', error));
+  </script>  
+  <script>
     fetch('footer.html')
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById('footer-placeholder').innerHTML = data;
-      });
+      .then(r => r.text())
+      .then(html => {
+        document.getElementById('footer-placeholder').innerHTML = html;
+      })
+      .catch(error => console.error('Error al cargar el footer:', error));
   </script>
   <script src="js/productos.js"></script>
+  <script src="js/all.js"></script>
   <script>
     function renderCatalog() {
       const container = document.getElementById("catalogoContainer");
       container.innerHTML = "";
-
       const all = products.getProducts();
       if (all.length === 0) {
         container.innerHTML = `<p class="text-muted">No hay productos disponibles.</p>`;
         return;
       }
-
       all.forEach(p => {
         const col = document.createElement("div");
         col.className = "col-md-4 mb-4";
-
         col.innerHTML = `
           <div class="card product-card h-100 shadow-sm">
             <img src="${p.img || 'img/default.png'}" class="card-img-top" alt="${p.name}">
@@ -58,26 +81,24 @@
               <h5 class="card-title">${p.name}</h5>
               <p class="card-text text-muted">Stock: ${p.stock}</p>
               <p class="fw-bold">$${p.price}</p>
-              <button class="btn btn-outline-primary w-100">Agregar al carrito</button>
+              <button class="btn btn-outline-primary w-100" 
+                onclick="addToCart('${p.name}', ${p.price})">
+                Agregar al carrito
+              </button>
             </div>
           </div>
         `;
         container.appendChild(col);
       });
     }
-
     document.addEventListener("DOMContentLoaded", () => {
       renderCatalog();
-
-      // cargar header/footer si existen
-      fetch("header.html").then(r => r.text()).then(d => {
-        document.getElementById("header-placeholder").innerHTML = d;
-      });
-      fetch("footer.html").then(r => r.text()).then(d => {
-        document.getElementById("footer-placeholder").innerHTML = d;
-      });
+      renderCart(); 
     });
+    const countEl = document.getElementById("cart-count");
+    countEl.textContent = cart.reduce((sum, item) => sum + item.qty, 0);
   </script>
+  
 </body>
 
 </html>

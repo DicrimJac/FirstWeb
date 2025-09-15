@@ -1,13 +1,3 @@
-/* .catalogo-item {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 350px;
-    border: 2px solid #333;
-    font-size: 3rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    transition: all 0.5s ease-in-out; */
 
 .catalogo-item {
     display: flex;
@@ -19,36 +9,26 @@
     font-weight: 800;
     text-transform: uppercase;
     transition: all 0.5s ease-in-out;
-
-
-    /* Estado normal */
-    /* background-image: url("../img/imgAnime.png"); */
     background-size: cover;
     background-position: center;
-    color: white;
-    /* letras blancas sobre la imagen */
+    color: white; 
 }
 
 .catalogo-item:hover {
     /* Estado hover */
-    background: white;
-    /* background-image: url("../img/imgAnime.png"); */
+    background: white;   
     background-size: cover;
     background-position: center;
     background-clip: text;
     -webkit-background-clip: text;
-    color: transparent;
-    /* letras con la imagen */
-    border-color: white;
-    /* opcional: cambia el borde */
+    color: transparent;   
+    border-color: white;    
 }
 
 body {
     background-image: url('../img/ttten.svg');
     background-size: cover;
     background-position: center;
-    max-width: 1500px;
-    /* O el ancho que desees */
-    margin: 0 auto;
-    /* Centra el contenido */
+    max-width: 1500px;    
+    margin: 0 auto;   
 }

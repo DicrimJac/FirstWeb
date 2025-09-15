@@ -71,36 +71,40 @@
             </div>
         </div>
     </div>
-
+    <!-- FOOTER -->
     <div id="footer-placeholder"></div>
 
+    <script src="js/users.js"></script>  
+    <script src="js/controlSeccion.js"></script>
     <script>
-        // Cargar header y footer
-        fetch('header.html').then(r => r.text()).then(data => {
-            document.getElementById('header-placeholder').innerHTML = data;
-        });
-        fetch('footer.html').then(r => r.text()).then(data => {
-            document.getElementById('footer-placeholder').innerHTML = data;
-        });
-    </script>
-
-    <!-- Tu users.js debe cargarse aquí -->
-    <script src="js/users.js"></script>
-
+        fetch('header.html')
+            .then(r => r.text())
+            .then(html => {
+                document.getElementById('header-placeholder').innerHTML = html;
+                applySessionUI(); 
+            })
+            .catch(error => console.error('Error al cargar el header:', error));
+    </script>    
     <script>
-        // Inputs del modal
+        fetch('footer.html')
+            .then(r => r.text())
+            .then(html => {
+                document.getElementById('footer-placeholder').innerHTML = html;
+            })
+            .catch(error => console.error('Error al cargar el footer:', error));
+    </script>    
+    <!-- - PORQUE DUPLICADO ????? -->
+    <script src="js/users.js"></script> 
+    <script>       
         const nameInput = document.getElementById("name");
         const emailInput = document.getElementById("email");
         const passInput = document.getElementById("pass");
         const roleInput = document.getElementById("rol");
-
         // Renderizar usuarios en la tabla
         function renderUsers() {
             const tbody = document.querySelector("#tablaProductos tbody");
             tbody.innerHTML = "";
-
             const allUsers = users.getUsers();
-
             allUsers.forEach((user, index) => {
                 const tr = document.createElement("tr");
                 tr.innerHTML = `
@@ -116,7 +120,6 @@
                 tbody.appendChild(tr);
             });
         }
-
         // Eliminar usuario
         function deleteUserAction(email) {
             if (confirm(`¿Seguro que quieres eliminar a ${email}?`)) {
@@ -124,39 +127,31 @@
                 renderUsers();
             }
         }
-
         // Editar usuario
         function editUser(email) {
             const user = users.getUsers().find(u => u.email === email);
             if (!user) return;
-
             document.getElementById("staticBackdropLabel").innerText = "Editar Usuario";
             nameInput.value = user.name;
             emailInput.value = user.email;
             emailInput.readOnly = true;
             passInput.value = user.pass || "";
             roleInput.value = user.role;
-
             document.getElementById("saveUserBtn").setAttribute("data-edit-email", email);
-
             const modal = new bootstrap.Modal(document.getElementById("staticBackdrop"));
             modal.show();
         }
-
         // Guardar usuario (nuevo o editado)
         function saveUser() {
             const name = nameInput.value.trim();
             const email = emailInput.value.trim();
             const pass = passInput.value.trim();
             const role = roleInput.value.trim();
-
             if (!name || !email || !role) {
                 alert("Todos los campos son obligatorios.");
                 return;
             }
-
             const editEmail = document.getElementById("saveUserBtn").getAttribute("data-edit-email");
-
             if (editEmail) {
                 // Editar: borrar viejo y registrar nuevo
                 users.deleteUser(editEmail);
@@ -183,9 +178,7 @@
                     localStorage.setItem(users.LS_KEYS.USERS, JSON.stringify(all));
                 }
             }
-
             renderUsers();
-
             // Reset modal
             const modalEl = document.getElementById("staticBackdrop");
             bootstrap.Modal.getInstance(modalEl).hide();
@@ -195,13 +188,20 @@
             passInput.value = "";
             roleInput.value = "";
         }
-
         // Inicializar
         document.addEventListener("DOMContentLoaded", () => {
             renderUsers();
             document.getElementById("saveUserBtn").addEventListener("click", saveUser);
         });
     </script>
+    <!-- BLOQUEO POR ROL -->
+    <script>
+        const currentUser = JSON.parse(localStorage.getItem("APP_CURRENT_USER"));
+        if (!currentUser || currentUser.role !== "admin") {
+            window.location.href = "inicio.html";
+        }
+    </script>
+
 </body>
 
 </html>

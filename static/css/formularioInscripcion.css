@@ -2,10 +2,8 @@ body {
   background-image: url('../img/ttten.svg');
   background-size: cover;
   background-position: center;
-  max-width: 1500px;
-  /* O el ancho que desees */
-  margin: 0 auto;
-  /* Centra el contenido */
+  max-width: 1500px; 
+  margin: 0 auto; 
 }
 
 .btn-transparent {

@@ -39,18 +39,45 @@
       </div>
     </div>
   </div>
+
+  <!-- Offcanvas Carrito DERECHO -->
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasCart" aria-labelledby="offcanvasCartLabel">
+    <div class="offcanvas-header bg-warning-subtle">
+      <h5 class="offcanvas-title fw-bold" id="offcanvasCartLabel">🛒 Tu Carrito</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+    </div>
+    <div class="offcanvas-body">
+      <ul class="list-group" id="cart-items">
+        <!-- Aquí se inyectarán productos -->
+      </ul>
+      <hr>
+      <div class="d-flex justify-content-between fw-bold">
+        <span>Total:</span>
+        <span id="cart-total">$0</span>
+      </div>
+      <a class="btn btn-warning w-100 mt-3" href="gracias.html">Finalizar Compra</a>
+    </div>
+  </div>
   <div id="footer-placeholder"></div>
+  
+  <script src="js/users.js"></script>
+  <script src="js/controlSeccion.js"></script>
   <script>
     fetch('header.html')
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById('header-placeholder').innerHTML = data;
-      });
+      .then(r => r.text())
+      .then(html => {
+        document.getElementById('header-placeholder').innerHTML = html;
+        applySessionUI(); 
+      })
+      .catch(error => console.error('Error al cargar el header:', error));
+  </script>  
+  <script>
     fetch('footer.html')
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById('footer-placeholder').innerHTML = data;
-      });
+      .then(r => r.text())
+      .then(html => {
+        document.getElementById('footer-placeholder').innerHTML = html;
+      })
+      .catch(error => console.error('Error al cargar el footer:', error));
   </script>
   <script>
     document.querySelectorAll(".catalogo-item").forEach(item => {
@@ -58,6 +85,7 @@
       item.style.backgroundImage = `url(${img})`;
     });
   </script>
+  
 </body>
 
 </html>

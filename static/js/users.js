@@ -1,45 +1,38 @@
 
+// control de usuarios 
 const LS_KEYS = {
     USERS: "APP_USERS",
     CURRENT_USER: "APP_CURRENT_USER"
 };
-
 const ALLOWED_DOMAINS_RE = /@(?:duocuc\.cl|duoc\.cl|gmail\.com)$/i;
 const AUTO_LOGIN_AFTER_REGISTER = true;
-
 // Declaracion de usuarios
 const seedUsers = [
     { name: "Admin", email: "admin@gmail.com", pass: "123456", role: "admin" },
     { name: "Usuario", email: "user@duoc.cl", pass: "123456", role: "user" }
 ];
-
 // se inicializan los usuarios
 function loadUsers() {
     const raw = localStorage.getItem(LS_KEYS.USERS);
     if (!raw) localStorage.setItem(LS_KEYS.USERS, JSON.stringify(seedUsers));
 }
-
 // Leer usuarios
 function getUsers() {
     try { return JSON.parse(localStorage.getItem(LS_KEYS.USERS)) || []; }
     catch { return []; }
 }
-
 // Guardar usuarios
 function saveUsers(users) {
     localStorage.setItem(LS_KEYS.USERS, JSON.stringify(users));
 }
-
 // Validar dominio de email
 function emailDomainOk(email) {
     return ALLOWED_DOMAINS_RE.test((email || "").trim());
 }
-
 // Buscar usuario por email
 function findUserByEmail(email) {
     return getUsers().find(u => u.email.toLowerCase() === (email || "").toLowerCase().trim());
 }
-
 // Establecer sesión
 function setSession(user) {
     localStorage.setItem(LS_KEYS.CURRENT_USER, JSON.stringify({
@@ -48,7 +41,6 @@ function setSession(user) {
         role: user.role
     }));
 }
-
 //  Registro de usuario 
 function registerUser({ name, email, pass }) {
     if (!name?.trim() || !email?.trim() || !pass?.trim()) {
@@ -67,7 +59,6 @@ function registerUser({ name, email, pass }) {
     if (AUTO_LOGIN_AFTER_REGISTER) setSession(newUser);
     return { ok: true, code: "registered_and_logged_in", user: newUser };
 }
-
 //  Login de usuario 
 function loginUser(email, pass) {
     if (!email?.trim() || !pass?.trim()) {
@@ -82,28 +73,23 @@ function loginUser(email, pass) {
     setSession(user);
     return { ok: true, code: "logged_in", user };
 }
-
-//  Eliminar usuario - SIN UTILIDAD TODAVIA
+//  Eliminar usuario
 function deleteUser(email) {
     let users = getUsers();
     users = users.filter(u => u.email.toLowerCase() !== email.toLowerCase());
     saveUsers(users);
 }
-
-//  Obtener usuario actual  - SIN UTILIDAD TODAVIA
+//  Obtener usuario actual
 function getCurrentUser() {
     try { return JSON.parse(localStorage.getItem(LS_KEYS.CURRENT_USER)) || null; }
     catch { return null; }
 }
-
-//  Cerrar sesión - SIN UTILIDAD TODAVIA
+//  Cerrar sesión  - NO ESTOY SEGURA SI SE OCUPO
 function logout() {
     localStorage.removeItem(LS_KEYS.CURRENT_USER);
 }
-
 // Inicializar
 loadUsers();
-
 // Exponer funciones globalmente
 window.users = {
     LS_KEYS,

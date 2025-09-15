@@ -1,7 +1,6 @@
 
-// ====== PRODUCT STORAGE LAYER ======
+// control de productos
 const PROD_KEY = "APP_PRODUCTS";
-
 const products = {
   getProducts() {
     try {

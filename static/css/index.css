@@ -2,10 +2,8 @@ body {
   background-image: url('../img/ttten.svg');
   background-size: cover;
   background-position: center;
-  max-width: 1500px;
-  /* O el ancho que desees */
-  margin: 0 auto;
-  /* Centra el contenido */
+  max-width: 1500px;  
+  margin: 0 auto;  
 }
 
 .btn-transparent {
@@ -16,10 +14,8 @@ body {
 }
 
 .btn-outline-warning {
-  color: black !important;
-  /* Texto normal en negro */
-  border-color: #ffc107 !important;
-  /* Mantiene el borde amarillo */
+  color: black !important;  
+  border-color: #ffc107 !important;  
 }
 
 .btn-outline-warning:hover,
@@ -30,4 +26,11 @@ body {
   background-color: #ffc107 !important;
   /* Fondo amarillo */
   border-color: #ffc107 !important;
+}
+
+.product-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+  background-color: #f8f9fa; 
 }

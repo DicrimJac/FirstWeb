@@ -66,7 +66,7 @@
             <div class="form-text">Opcional. Si no subes, se usará una imagen por defecto.</div>
           </div>
         </div>
-        <!-- ⚠️ El footer debe ir aquí, dentro de .modal-content -->
+        <!-- FOOTER DEL MODEL -->
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
           <button type="button" id="saveProdBtn" class="btn btn-warning">Guardar</button>
@@ -74,34 +74,39 @@
       </div>
     </div>
   </div>
-
-
-
   <div id="footer-placeholder"></div>
+  
+  <script src="js/users.js"></script>  
+  <script src="js/controlSeccion.js"></script>
   <script>
     fetch('header.html')
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById('header-placeholder').innerHTML = data;
-      });
+      .then(r => r.text())
+      .then(html => {
+        document.getElementById('header-placeholder').innerHTML = html;
+        applySessionUI(); 
+      })
+      .catch(error => console.error('Error al cargar el header:', error));
+  </script>
+ 
+  <script>
     fetch('footer.html')
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById('footer-placeholder').innerHTML = data;
-      });
+      .then(r => r.text())
+      .then(html => {
+        document.getElementById('footer-placeholder').innerHTML = html;
+      })
+      .catch(error => console.error('Error al cargar el footer:', error));
   </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- ACA SE EJECUTA EL CONTROL DE PRODUCTO -->
   <script src="js/productos.js"></script>
   <script>
     const nameInput = document.getElementById("prodName");
     const stockInput = document.getElementById("prodStock");
     const priceInput = document.getElementById("prodPrice");
     const imgInput = document.getElementById("prodImg");
-
     function renderProducts() {
       const tbody = document.querySelector("#tablaProductos tbody");
       tbody.innerHTML = "";
-
       const all = products.getProducts();
       all.forEach((p, index) => {
         const tr = document.createElement("tr");
@@ -118,44 +123,35 @@
         tbody.appendChild(tr);
       });
     }
-
     function deleteProductAction(id) {
       if (confirm("¿Seguro que quieres eliminar este producto?")) {
         products.deleteProduct(id);
         renderProducts();
       }
     }
-
     function editProduct(id) {
       const p = products.getProducts().find(prod => prod.id === id);
       if (!p) return;
-
       document.getElementById("staticBackdropLabel").innerText = "Editar Producto";
       nameInput.value = p.name;
       stockInput.value = p.stock;
       priceInput.value = p.price;
       imgInput.value = "";
-
       document.getElementById("saveProdBtn").setAttribute("data-edit-id", id);
-
       const modal = new bootstrap.Modal(document.getElementById("staticBackdrop"));
       modal.show();
     }
-
     function saveProduct() {
       const name = nameInput.value.trim();
       const stock = parseInt(stockInput.value.trim()) || 0;
       const price = parseFloat(priceInput.value.trim()) || 0;
-
       if (!name) {
         alert("El nombre es obligatorio");
         return;
       }
-
       const editId = document.getElementById("saveProdBtn").getAttribute("data-edit-id");
       const file = imgInput.files[0];
-
-      // función auxiliar que guarda el producto
+      // ALGO PARA GUARDAR LOS PRODUCTOS - NOSE SI SE IMPLEMENTO
       const doSave = (imgData) => {
         if (editId) {
           const newProd = { id: editId, name, stock, price, img: imgData };
@@ -165,11 +161,9 @@
           const newProd = { id: Date.now().toString(), name, stock, price, img: imgData };
           products.addProduct(newProd);
         }
-
         renderProducts();
         resetModal();
       };
-
       if (file) {
         const reader = new FileReader();
         reader.onloadend = () => doSave(reader.result);
@@ -179,27 +173,28 @@
         doSave("img/reno.png");
       }
     }
-
     function resetModal() {
-  const modalEl = document.getElementById("staticBackdrop");
-  const modal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
-  modal.hide();
-
-  // 🔧 fuerza limpieza de backdrop (por si acaso)
-  document.querySelectorAll(".modal-backdrop").forEach(el => el.remove());
-
-  document.getElementById("staticBackdropLabel").innerText = "Nuevo Producto";
-  nameInput.value = "";
-  stockInput.value = "";
-  priceInput.value = "";
-  imgInput.value = "";
-}
-
-
+      const modalEl = document.getElementById("staticBackdrop");
+      const modal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
+      modal.hide();      
+      document.querySelectorAll(".modal-backdrop").forEach(el => el.remove());
+      document.getElementById("staticBackdropLabel").innerText = "Nuevo Producto";
+      nameInput.value = "";
+      stockInput.value = "";
+      priceInput.value = "";
+      imgInput.value = "";
+    }
     document.addEventListener("DOMContentLoaded", () => {
       renderProducts();
       document.getElementById("saveProdBtn").addEventListener("click", saveProduct);
     });
+  </script>
+<!-- BLOQUEO PARA REDIRECCIONAR CUALQUIER USUARIO NO ADMIN -->
+  <script>
+    const currentUser = JSON.parse(localStorage.getItem("APP_CURRENT_USER"));
+    if (!currentUser || currentUser.role !== "admin") {
+      window.location.href = "inicio.html";
+    }
   </script>
 
 </body>
