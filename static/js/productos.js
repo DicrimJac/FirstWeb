@@ -6,21 +6,21 @@ const seedProducts = [
     name: "Figura Goku",
     price: 15000,
     stock: 10,
-    img: "img/goku.png"
+    img: "img/reno.png"
   },
   {
     id: 2,
     name: "Figura Naruto",
     price: 12000,
     stock: 8,
-    img: "img/naruto.png"
+    img: "img/reno.png"
   },
   {
     id: 3,
     name: "Figura Luffy",
     price: 18000,
     stock: 5,
-    img: "img/luffy.png"
+    img: "img/reno.png"
   }
 ];
 
