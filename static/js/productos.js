@@ -1,5 +1,5 @@
+const PROD_KEY = "APP_PRODUCTS";
 
-// control de productos
 const seedProducts = [
   {
     id: 1,
@@ -32,7 +32,7 @@ function loadProducts() {
   }
 }
 
-const PROD_KEY = "APP_PRODUCTS";
+
 const products = {
   getProducts() {
     try {
