@@ -36,22 +36,22 @@
         <span>Total:</span>
         <span id="cart-total">$0</span>
       </div>
-      <a class="btn btn-warning w-100 mt-3" href = "gracias.html">Finalizar Compra</a>
+      <a class="btn btn-warning w-100 mt-3" href="gracias.html">Finalizar Compra</a>
     </div>
   </div>
   <div id="footer-placeholder"></div>
 
-  <script src="js/users.js"></script>  
+  <script src="js/users.js"></script>
   <script src="js/controlSeccion.js"></script>
   <script>
     fetch('header.html')
       .then(r => r.text())
       .then(html => {
         document.getElementById('header-placeholder').innerHTML = html;
-        applySessionUI(); 
+        applySessionUI();
       })
       .catch(error => console.error('Error al cargar el header:', error));
-  </script>  
+  </script>
   <script>
     fetch('footer.html')
       .then(r => r.text())
@@ -62,6 +62,13 @@
   </script>
   <script src="js/productos.js"></script>
   <script src="js/all.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      loadProducts();   // asegura que siempre haya productos
+      renderCatalog();  // pinta el catálogo con lo que haya en localStorage
+    });
+º
+  </script>
   <script>
     function renderCatalog() {
       const container = document.getElementById("catalogoContainer");
@@ -93,12 +100,12 @@
     }
     document.addEventListener("DOMContentLoaded", () => {
       renderCatalog();
-      renderCart(); 
+      renderCart();
     });
     const countEl = document.getElementById("cart-count");
     countEl.textContent = cart.reduce((sum, item) => sum + item.qty, 0);
   </script>
-  
+
 </body>
 
 </html>

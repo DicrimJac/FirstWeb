@@ -1,5 +1,37 @@
 
 // control de productos
+const seedProducts = [
+  {
+    id: 1,
+    name: "Figura Goku",
+    price: 15000,
+    stock: 10,
+    img: "img/goku.png"
+  },
+  {
+    id: 2,
+    name: "Figura Naruto",
+    price: 12000,
+    stock: 8,
+    img: "img/naruto.png"
+  },
+  {
+    id: 3,
+    name: "Figura Luffy",
+    price: 18000,
+    stock: 5,
+    img: "img/luffy.png"
+  }
+];
+
+// === Inicializar productos si no existen ===
+function loadProducts() {
+  const raw = localStorage.getItem(PROD_KEY);
+  if (!raw) {
+    localStorage.setItem(PROD_KEY, JSON.stringify(seedProducts));
+  }
+}
+
 const PROD_KEY = "APP_PRODUCTS";
 const products = {
   getProducts() {
