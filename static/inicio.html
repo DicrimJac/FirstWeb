@@ -16,7 +16,7 @@
 
 <body>
   <div id="header-placeholder"></div>
-  <div id="carouselExampleIndicators" class="carousel slide">
+  <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
     <div class="carousel-indicators">
       <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
         aria-current="true" aria-label="Slide 1"></button>
@@ -72,31 +72,37 @@
         <!-- Noticia 1 -->
         <div class="col">
           <div class="card h-100 shadow">
-            <img src="img/imgNoticias/imgJujutsuKaisen.jpeg" class="card-img-top" alt="Noticia Anime">
-            <div class="card-body">
-              <h5 class="card-title">Nueva temporada de Jujutsu Kaisen</h5>
-              <p class="card-text">El anime regresa con una nueva temporada llena de acción y sorpresas.</p>
-            </div>
+            <a href="https://as.com/meristation/manga-y-anime/se-acabo-la-espera-jujutsu-kaisen-presenta-el-primer-trailer-de-su-temporada-3-y-ya-hay-fecha-de-estreno-n/" target="_blank">
+              <img src="img/imgNoticias/imgJujutsuKaisen.jpeg" class="card-img-top" alt="Noticia Anime">
+              <div class="card-body">
+                <h5 class="card-title">Nueva temporada de Jujutsu Kaisen</h5>
+                <p class="card-text">El anime regresa con una nueva temporada llena de acción y sorpresas.</p>
+              </div>
+            </a>
           </div>
         </div>
         <!-- Noticia 2 -->
         <div class="col">
           <div class="card h-100 shadow">
-            <img src="img/imgNoticias/imgNarutoSasuke2.jpeg" class="card-img-top" alt="Figura Naruto y Sasuke">
-            <div class="card-body">
-              <h5 class="card-title">Figura 3D de Naruto</h5>
-              <p class="card-text">Se lanza una edición coleccionista con detalles increíbles y edición limitada.</p>
-            </div>
+            <a href="https://naruto-official.com/es/news/01_1839" target="_blank">
+              <img src="img/imgNoticias/imgNarutoSasuke2.jpeg" class="card-img-top" alt="Figura Naruto y Sasuke">
+              <div class="card-body">
+                <h5 class="card-title">Figura 3D de Naruto</h5>
+                <p class="card-text">Se lanza una edición coleccionista con detalles increíbles y edición limitada.</p>
+              </div>
+            </a>
           </div>
         </div>
         <!-- Noticia 3 -->
         <div class="col">
           <div class="card h-100 shadow">
-            <img src="img/imgNoticias/imgLuffy.png" class="card-img-top" alt="Figura Luffy">
-            <div class="card-body">
-              <h5 class="card-title">One Piece: Luffy en Gear 5</h5>
-              <p class="card-text">La esperada figura ya está disponible para preventa en tiendas oficiales.</p>
-            </div>
+            <a href="https://as.com/meristation/manga-y-anime/one-piece-para-todos-los-bolsillos-con-un-imponente-luffy-gear-5-y-otro-que-es-una-monada-n/" target="_blank">
+              <img src="img/imgNoticias/imgLuffy.png" class="card-img-top" alt="Figura Luffy">
+              <div class="card-body">
+                <h5 class="card-title">One Piece: Luffy en Gear 5</h5>
+                <p class="card-text">La esperada figura ya está disponible para preventa en tiendas oficiales.</p>
+              </div>
+            </a>
           </div>
         </div>
       </div>
@@ -146,6 +152,45 @@
         })
         .catch(error => console.error('Error al cargar el footer:', error));
     </script>
+    <script src="js/productos.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        loadProducts();   // asegura que siempre haya productos
+        renderInicio();   // pinta solo 6 productos en la página de inicio
+      });
+
+      function renderInicio() {
+        const container = document.getElementById("productosInicio");
+        container.innerHTML = "";
+        const all = products.getProducts().slice(0, 6); // 👈 toma los primeros 6
+
+        if (all.length === 0) {
+          container.innerHTML = `<p class="text-muted">No hay productos disponibles.</p>`;
+          return;
+        }
+
+        all.forEach(p => {
+          const col = document.createElement("div");
+          col.className = "col-md-4 mb-4";
+          col.innerHTML = `
+        <div class="card product-card h-100 shadow-sm">
+          <img src="${p.img || 'img/default.png'}" class="card-img-top" alt="${p.name}">
+          <div class="card-body">
+            <h5 class="card-title">${p.name}</h5>
+            <p class="card-text text-muted">Stock: ${p.stock}</p>
+            <p class="fw-bold">$${p.price}</p>
+            <button class="btn btn-outline-primary w-100" 
+              onclick="addToCart('${p.name}', ${p.price})">
+              Agregar al carrito
+            </button>
+          </div>
+        </div>
+      `;
+          container.appendChild(col);
+        });
+      }
+    </script>
+
 
 </body>
 

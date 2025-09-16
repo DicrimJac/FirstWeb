@@ -64,3 +64,12 @@ body {
     /* Mantiene proporción y recorta */
     object-position: center;
 }
+
+.card a {
+  text-decoration: none; /* quita el subrayado */
+  color: inherit;        /* usa el mismo color del texto normal */
+}
+
+.card a:hover {
+  color: #0d6efd;        /* si quieres que al pasar el mouse cambie a azul Bootstrap */
+}

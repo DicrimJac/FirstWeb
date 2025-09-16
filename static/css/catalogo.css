@@ -1,5 +1,14 @@
 
+body {
+    background-image: url('../img/ttten.svg');
+    background-size: cover;
+    background-position: center;
+    max-width: 1500px; /* Ancho máximo del contenido */
+    margin: 0 auto;    /* Centra el contenido */
+}
+
 .catalogo-item {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -8,27 +17,27 @@
     font-size: 3rem;
     font-weight: 800;
     text-transform: uppercase;
-    transition: all 0.5s ease-in-out;
+    overflow: hidden;
     background-size: cover;
     background-position: center;
-    color: white; 
+    color: rgb(255, 255, 255);
+    transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out;
 }
 
-.catalogo-item:hover {
-    /* Estado hover */
-    background: white;   
-    background-size: cover;
-    background-position: center;
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;   
-    border-color: white;    
+.catalogo-item::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0); /* Invisible por defecto */
+    transition: background 1.5s ease-in-out;
 }
 
-body {
-    background-image: url('../img/ttten.svg');
-    background-size: cover;
-    background-position: center;
-    max-width: 1500px;    
-    margin: 0 auto;   
+.catalogo-item:hover::after {
+    background: rgba(255, 255, 255, 0.4); /* Capa blanca al pasar el mouse */
+    color: black;
+}
+
+.catalogo-item span {
+    position: relative;
+    z-index: 1; /* Siempre arriba del overlay */
 }

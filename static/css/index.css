@@ -23,9 +23,9 @@ body {
 .btn-outline-warning:focus {
   color: black !important;
   /* Texto negro también en hover/active */
-  background-color: #ffc107 !important;
+  background-color: #FFB300 !important;
   /* Fondo amarillo */
-  border-color: #ffc107 !important;
+  border-color: #FFB300 !important;
 }
 
 .product-card img {
@@ -33,4 +33,18 @@ body {
   height: 200px;
   object-fit: contain;
   background-color: #f8f9fa; 
+}
+
+.btn-custom {
+    color: black !important;                /* Texto negro */
+    background-color: #ffc107 !important;   /* Fondo amarillo */
+    border-color: #ffc107 !important;       /* Borde amarillo */
+}
+
+.btn-custom:hover,
+.btn-custom:focus,
+.btn-custom:active {
+    color: black !important;                /* Texto negro en hover/active */
+    background-color: #FFB300 !important;   /* Fondo amarillo en hover/active */
+    border-color: #FFB300 !important;       /* Borde amarillo en hover/active */
 }

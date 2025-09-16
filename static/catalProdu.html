@@ -81,8 +81,8 @@
             <h5 class="card-title">${p.name}</h5>
             <p class="card-text text-muted">Stock: ${p.stock}</p>
             <p class="fw-bold">$${p.price}</p>
-            <button class="btn btn-outline-primary w-100" 
-              onclick="addToCart('${p.name}', ${p.price})">
+            <button class="btn btn-custom w-100" 
+                onclick="addToCart('${p.name}', ${p.price})">
               Agregar al carrito
             </button>
           </div>
@@ -98,9 +98,5 @@
     renderCart();     // inicializa el carrito
   });
 </script>
-
-
-
 </body>
-
 </html>
