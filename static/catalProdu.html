@@ -64,12 +64,11 @@
   <script src="js/all.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      loadProducts();   // asegura que siempre haya productos
-      renderCatalog();  // pinta el catálogo con lo que haya en localStorage
+      loadProducts();   // asegura que existan productos semilla
+      renderCatalog();  // pinta el catálogo
+      renderCart();     // inicializa el carrito
     });
-º
-  </script>
-  <script>
+
     function renderCatalog() {
       const container = document.getElementById("catalogoContainer");
       container.innerHTML = "";
@@ -82,29 +81,24 @@
         const col = document.createElement("div");
         col.className = "col-md-4 mb-4";
         col.innerHTML = `
-          <div class="card product-card h-100 shadow-sm">
-            <img src="${p.img || 'img/default.png'}" class="card-img-top" alt="${p.name}">
-            <div class="card-body">
-              <h5 class="card-title">${p.name}</h5>
-              <p class="card-text text-muted">Stock: ${p.stock}</p>
-              <p class="fw-bold">$${p.price}</p>
-              <button class="btn btn-outline-primary w-100" 
-                onclick="addToCart('${p.name}', ${p.price})">
-                Agregar al carrito
-              </button>
-            </div>
+        <div class="card product-card h-100 shadow-sm">
+          <img src="${p.img || 'img/default.png'}" class="card-img-top" alt="${p.name}">
+          <div class="card-body">
+            <h5 class="card-title">${p.name}</h5>
+            <p class="card-text text-muted">Stock: ${p.stock}</p>
+            <p class="fw-bold">$${p.price}</p>
+            <button class="btn btn-outline-primary w-100" 
+              onclick="addToCart('${p.name}', ${p.price})">
+              Agregar al carrito
+            </button>
           </div>
-        `;
+        </div>
+      `;
         container.appendChild(col);
       });
     }
-    document.addEventListener("DOMContentLoaded", () => {
-      renderCatalog();
-      renderCart();
-    });
-    const countEl = document.getElementById("cart-count");
-    countEl.textContent = cart.reduce((sum, item) => sum + item.qty, 0);
   </script>
+
 
 </body>
 
